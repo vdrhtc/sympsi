@@ -2,7 +2,7 @@
 
 from warnings import warn
 
-from sympy.core.compatibility import u
+
 from sympy import Add, Mul, Pow, Integer, exp, sqrt, conjugate
 from sympy.functions.special.tensor_functions import KroneckerDelta
 
@@ -110,7 +110,7 @@ class FermionOp(Operator):
         if self.is_annihilation:
             return pform
         else:
-            return pform**prettyForm(u('\u2020'))
+            return pform**prettyForm(('\u2020'))
             
 class MultiFermionOp(Operator):
     """Fermionic operators that satisfy the commutation relations:
@@ -258,7 +258,7 @@ class MultiFermionOp(Operator):
         if self.is_annihilation:
             return pform
         else:
-            return pform**prettyForm(u('\u2020'))
+            return pform**prettyForm(('\u2020'))
 
 
 class FermionFockKet(Ket):

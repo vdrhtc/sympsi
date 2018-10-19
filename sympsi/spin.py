@@ -5,7 +5,7 @@ from __future__ import print_function, division
 from sympy import (Add, binomial, cos, exp, Expr, factorial, I, Integer, Mul,
                    pi, Rational, S, sin, simplify, sqrt, Sum, symbols, sympify,
                    Tuple, Dummy)
-from sympy.core.compatibility import u, unicode
+
 from sympy.core.evaluate import global_evaluate
 from sympy.matrices import zeros
 from sympy.printing.pretty.stringpict import prettyForm, stringPict
@@ -405,7 +405,7 @@ class J2Op(SpinOpBase, HermitianOperator):
 
     def _print_contents_pretty(self, printer, *args):
         a = prettyForm(unicode(self.name))
-        b = prettyForm(u('2'))
+        b = prettyForm(('2'))
         return a**b
 
     def _print_contents_latex(self, printer, *args):
@@ -501,7 +501,7 @@ class Rotation(UnitaryOperator):
 
     def _print_operator_name_pretty(self, printer, *args):
         if printer._use_unicode:
-            return prettyForm(u('\u211B') + u(' '))
+            return prettyForm(('\u211B') + (' '))
         else:
             return prettyForm("R ")
 

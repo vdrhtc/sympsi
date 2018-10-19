@@ -8,12 +8,12 @@ Authors:
 from __future__ import print_function, division
 
 from sympy import Basic, Interval, oo, sympify
-from sympy.core.compatibility import u
+
 from sympy.printing.pretty.stringpict import prettyForm
 
 from sympsi.qexpr import QuantumError
 
-from sympy.core.compatibility import reduce
+
 
 __all__ = [
     'HilbertSpaceError',
@@ -96,11 +96,11 @@ class HilbertSpace(Basic):
             return False
 
     def _sympystr(self, printer, *args):
-        return u('H')
+        return ('H')
 
     def _pretty(self, printer, *args):
-        # u = u('\u2108') # script
-        ustr = u('\u0048')
+        # u = ('\u2108') # script
+        ustr = ('\u0048')
         return prettyForm(ustr)
 
     def _latex(self, printer, *args):
@@ -174,8 +174,8 @@ class ComplexSpace(HilbertSpace):
         return "C(%s)" % printer._print(self.dimension, *args)
 
     def _pretty(self, printer, *args):
-        # u = u('\u2102') # script
-        ustr = u('\u0043')
+        # u = ('\u2102') # script
+        ustr = ('\u0043')
         pform_exp = printer._print(self.dimension, *args)
         pform_base = prettyForm(ustr)
         return pform_base**pform_exp
@@ -227,8 +227,8 @@ class L2(HilbertSpace):
         return "L2(%s)" % printer._print(self.interval, *args)
 
     def _pretty(self, printer, *args):
-        pform_exp = prettyForm(u('2'))
-        pform_base = prettyForm(u('L'))
+        pform_exp = prettyForm(('2'))
+        pform_base = prettyForm(('L'))
         return pform_base**pform_exp
 
     def _latex(self, printer, *args):
@@ -274,8 +274,8 @@ class FockSpace(HilbertSpace):
         return "F"
 
     def _pretty(self, printer, *args):
-        # u = u('\u2131') # script
-        ustr = u('\u0046')
+        # u = ('\u2131') # script
+        ustr = ('\u0046')
         return prettyForm(ustr)
 
     def _latex(self, printer, *args):
@@ -420,7 +420,7 @@ class TensorProductHilbertSpace(HilbertSpace):
             pform = prettyForm(*pform.right(next_pform))
             if i != length - 1:
                 if printer._use_unicode:
-                    pform = prettyForm(*pform.right(u(' ') + u('\u2a02') + u(' ')))
+                    pform = prettyForm(*pform.right((' ') + ('\u2a02') + (' ')))
                 else:
                     pform = prettyForm(*pform.right(' x '))
         return pform
@@ -531,7 +531,7 @@ class DirectSumHilbertSpace(HilbertSpace):
             pform = prettyForm(*pform.right(next_pform))
             if i != length - 1:
                 if printer._use_unicode:
-                    pform = prettyForm(*pform.right(u(' ') + u('\u2295') + u(' ')))
+                    pform = prettyForm(*pform.right((' ') + ('\u2295') + (' ')))
                 else:
                     pform = prettyForm(*pform.right(' + '))
         return pform
@@ -642,7 +642,7 @@ class TensorPowerHilbertSpace(HilbertSpace):
     def _pretty(self, printer, *args):
         pform_exp = printer._print(self.exp, *args)
         if printer._use_unicode:
-            pform_exp = prettyForm(*pform_exp.left(prettyForm(u('\u2a02'))))
+            pform_exp = prettyForm(*pform_exp.left(prettyForm(('\u2a02'))))
         else:
             pform_exp = prettyForm(*pform_exp.left(prettyForm('x')))
         pform_base = printer._print(self.base, *args)

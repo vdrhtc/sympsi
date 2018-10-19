@@ -4,10 +4,10 @@ from __future__ import print_function, division
 
 from sympy.core.numbers import NumberSymbol
 from sympy.core.singleton import Singleton
-from sympy.core.compatibility import u, with_metaclass
+from sympy.core.compatibility import with_metaclass
 from sympy.printing.pretty.stringpict import prettyForm
 
-# check sympy version. Version 0.7.7 
+# check sympy version. Version 0.7.7
 # mpmath not included in Version 0.7.7. See Sympy install website
 import sympy
 if sympy.__version__ <= '0.7.6':
@@ -58,7 +58,7 @@ class HBar(with_metaclass(Singleton, NumberSymbol)):
 
     def _pretty(self, printer, *args):
         if printer._use_unicode:
-            return prettyForm(u('\u210f'))
+            return prettyForm(('\u210f'))
         return prettyForm('hbar')
 
     def _latex(self, printer, *args):

@@ -3,7 +3,7 @@ from __future__ import print_function, division
 from sympy import Expr, sympify, Symbol, Matrix
 from sympy.printing.pretty.stringpict import prettyForm
 from sympy.core.containers import Tuple
-from sympy.core.compatibility import is_sequence, string_types, u
+from sympy.core.compatibility import is_sequence, string_types
 from sympy.physics.quantum.matrixutils import (
     numpy_ndarray, scipy_sparse_matrix,
     to_sympy, to_numpy, to_scipy_sparse
@@ -94,7 +94,7 @@ class QExpr(Expr):
     is_commutative = False
 
     # The separator used in printing the label.
-    _label_separator = u('')
+    _label_separator = ''
 
     @property
     def free_symbols(self):

@@ -4,7 +4,7 @@ from __future__ import print_function, division
 
 from sympy import (cacheit, conjugate, Expr, Function, integrate, oo, sqrt,
                    Tuple)
-from sympy.core.compatibility import u
+
 from sympy.printing.pretty.stringpict import prettyForm, stringPict
 from sympsi.qexpr import QExpr, dispatch_method
 
@@ -34,10 +34,10 @@ _straight_bracket = "|"
 
 # Unicode brackets
 # MATHEMATICAL ANGLE BRACKETS
-_lbracket_ucode = u("\u27E8")
-_rbracket_ucode = u("\u27E9")
+_lbracket_ucode = ("\u27E8")
+_rbracket_ucode = ("\u27E9")
 # LIGHT VERTICAL BAR
-_straight_bracket_ucode = u("\u2758")
+_straight_bracket_ucode = ("\u2758")
 
 # Other options for unicode printing of <, > and | for Dirac notation.
 
@@ -133,7 +133,7 @@ class StateBase(QExpr):
         # Setup for unicode vs ascii
         if use_unicode:
             lbracket, rbracket = self.lbracket_ucode, self.rbracket_ucode
-            slash, bslash, vert = u('\u2571'), u('\u2572'), u('\u2502')
+            slash, bslash, vert = ('\u2571'), ('\u2572'), ('\u2502')
         else:
             lbracket, rbracket = self.lbracket, self.rbracket
             slash, bslash, vert = '/', '\\', '|'

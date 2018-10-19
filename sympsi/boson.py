@@ -1,6 +1,6 @@
 """Bosonic quantum operators."""
 
-from sympy.core.compatibility import u
+
 from sympy import Mul, Integer, exp, sqrt, conjugate, DiracDelta, Symbol
 from sympsi import Operator, Commutator
 from sympsi import HilbertSpace, FockSpace, Ket, Bra, IdentityOperator
@@ -126,17 +126,17 @@ class BosonOp(Operator):
         if self.is_annihilation:
             return pform
         else:
-            return pform**prettyForm(u('\u2020'))
+            return pform**prettyForm(('\u2020'))
 
 
 class MultiBosonOp(BosonOp):
     """Bosonic operators that satisfy the commutation relations:
     for discrete label for modes:
-        [a(k1), Dagger(a(k2))] == KroneckerDelta(k1, k2). 
-    
+        [a(k1), Dagger(a(k2))] == KroneckerDelta(k1, k2).
+
     for continuous label for modes:
         [a(k1), Dagger(a(k2))] == DiracDelta(k1 - k2).
-        
+
     and in both cases:
         [a(k1), a(k2)] == [Dagger(a(k1)), Dagger(a(k2))] == 0.
 
@@ -152,17 +152,17 @@ class MultiBosonOp(BosonOp):
 
     normalization : ['discrete', 'continuous']
         'discrete' for KroneckerDelta function,
-        'continuous' for DiracDelta function. 
+        'continuous' for DiracDelta function.
         should be specified in any case.
 
     annihilation : bool
         A bool that indicates if the bosonic operator is an annihilation (True,
         default value) or creation operator (False)
-    
-        
+
+
     Examples
     ========
-    
+
     >>> from sympsi import Dagger, Commutator
     >>> from sympsi.boson import MultiBosonOp
     >>> w1, w2 = symbols("w1, w2")
@@ -182,8 +182,8 @@ class MultiBosonOp(BosonOp):
     0
     >>> Commutator(Dagger(b1), Dagger(b2)).doit()
     0
-    
-    """        
+
+    """
     @property
     def name(self):
         return self.args[0]
@@ -195,7 +195,7 @@ class MultiBosonOp(BosonOp):
     @property
     def free_symbols(self):
         return set([self, self.mode])
-    
+
     @property
     def normalization_type(self):
         return str(self.args[2])
@@ -211,11 +211,11 @@ class MultiBosonOp(BosonOp):
     def __new__(cls, *args, **hints):
         if not len(args) in [3, 4]:
             raise ValueError('3 or 4 parameters expected, got %s' % args)
-        
+
         if str(args[2]) not in ['discrete', 'continuous']:
             print("discrete or continuous: %s" % args[2])
             raise ValueError('The third argument should be "discrete" or "continuous", got %s' % args)
-            
+
         if len(args) == 3:
             args = (args[0], args[1], str(args[2]), Integer(1))
 
@@ -230,7 +230,7 @@ class MultiBosonOp(BosonOp):
             return Integer(0)
 
     def _eval_commutator_MultiBosonOp(self, other, **hints):
-        if (self.name == other.name and 
+        if (self.name == other.name and
             self.normalization_type == other.normalization_type):
             if not self.is_annihilation and other.is_annihilation:
                 if self.normalization_type == 'discrete':
@@ -241,7 +241,7 @@ class MultiBosonOp(BosonOp):
                 return Integer(0)
             elif self.is_annihilation and other.is_annihilation:
                 return Integer(0)
-                
+
         elif 'independent' in hints and hints['independent']:
             # [a, b] = 0
             return Integer(0)
@@ -285,7 +285,7 @@ class MultiBosonOp(BosonOp):
         if self.is_annihilation:
             return pform
         else:
-            return pform**prettyForm(u('\u2020'))
+            return pform**prettyForm(('\u2020'))
 
 
 class BosonFockKet(Ket):
@@ -296,7 +296,7 @@ class BosonFockKet(Ket):
 
     n : Number
         The Fock state number.
-        
+
 
     """
 
@@ -351,7 +351,7 @@ class BosonFockBra(Bra):
         return FockSpace()
 
 class MultiBosonFockKet(Ket):
-    """Fock state ket for a multimode-bosonic mode(KroneckerDelta normalization). 
+    """Fock state ket for a multimode-bosonic mode(KroneckerDelta normalization).
 
     Parameters
     ==========
@@ -360,7 +360,7 @@ class MultiBosonFockKet(Ket):
         The Fock state number.
 
     mode : Symbol
-        A symbol that denotes the mode label.  
+        A symbol that denotes the mode label.
 
     """
 
@@ -371,14 +371,14 @@ class MultiBosonFockKet(Ket):
     def n(self):
         return self.label[0]
 
-    @property    
+    @property
     def mode(self):
         return self.label[1]
-        
+
     @classmethod
     def default_args(self):
         return (Integer(0), Symbol("k"))
-        
+
     @classmethod
     def dual_class(self):
         return MultiBosonFockBra
@@ -403,9 +403,9 @@ class MultiBosonFockKet(Ket):
 
     def _latex(self, printer, *args):
         return r'{\left| {%s} \right\rangle}{_{%s}}' % (str(self.n), str(self.mode))
-        
+
 class MultiBosonFockBra(Bra):
-    """Fock state bra for a multimode-bosonic mode(KroneckerDelta normalization). 
+    """Fock state bra for a multimode-bosonic mode(KroneckerDelta normalization).
 
     Parameters
     ==========
@@ -414,7 +414,7 @@ class MultiBosonFockBra(Bra):
         The Fock state number.
 
     mode : Symbol
-        A symbol that denotes the mode label.  
+        A symbol that denotes the mode label.
 
     """
 
@@ -425,10 +425,10 @@ class MultiBosonFockBra(Bra):
     def n(self):
         return self.label[0]
 
-    @property    
+    @property
     def mode(self):
         return self.label[1]
-    
+
     @classmethod
     def dual_class(self):
         return MultiBosonFockKet
@@ -436,7 +436,7 @@ class MultiBosonFockBra(Bra):
     @classmethod
     def _eval_hilbert_space(cls, label):
         return FockSpace()
-    
+
     def _latex(self, printer, *args):
         return r'{_{%s}}{\left\langle {%s} \right|}' % (str(self.mode), str(self.n))
 
@@ -506,13 +506,13 @@ class BosonCoherentBra(Bra):
             return self.alpha * self
         else:
             return None
-            
-            
+
+
 class BosonVacuumKet(Ket):
     """
     Ket representing the Vacuum State. |vac>
     returns zero if an annihilation operator is applied on the left.
-    
+
     """
     def __new__(cls):
         return Ket.__new__(cls)
@@ -527,19 +527,19 @@ class BosonVacuumKet(Ket):
 
     def _eval_innerproduct_BosonVacuumBra(self, bra, **hints):
         return Integer(1)
-    
+
     def _apply_operator_BosonOp(self, op, **options):
         if op.is_annihilation:
             return Integer(0)
         else:
             return None
-            
+
     def _apply_operator_MultiBosonOp(self, op, **options):
         if op.is_annihilation:
             return Integer(0)
         else:
             return None
-            
+
     def _latex(self, printer, *args):
         return r'{\left| \mathrm{vac} \right\rangle}'
 
@@ -571,6 +571,6 @@ class BosonVacuumBra(Bra):
             return Integer(0)
         else:
             return None
-            
+
     def _latex(self, printer, *args):
         return r'{\left< \mathrm{vac} \right|}'
