@@ -76,6 +76,8 @@ def configuration(parent_package='', top_path=None):
                        quiet=True)
 
     config.add_subpackage('sympsi')
+    config.add_subpackage('sympsi.tests')
+
     config.get_version('sympsi/version.py')
 
     return config

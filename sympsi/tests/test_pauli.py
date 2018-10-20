@@ -1,8 +1,8 @@
 from sympy import I, Mul
-from sympy.physics.quantum import Dagger, Commutator, AntiCommutator, qapply
-from sympy.physics.quantum.pauli import (SigmaOpBase, SigmaX, SigmaY, SigmaZ,
+from sympsi import Dagger, Commutator, AntiCommutator, qapply
+from sympsi.pauli import (SigmaOpBase, SigmaX, SigmaY, SigmaZ,
                                          SigmaMinus, SigmaPlus)
-from sympy.physics.quantum.pauli import SigmaZKet, SigmaZBra
+from sympsi.pauli import SigmaZKet, SigmaZBra
 
 
 sx, sy, sz = SigmaX(), SigmaY(), SigmaZ()
@@ -10,6 +10,8 @@ sx1, sy1, sz1 = SigmaX(1), SigmaY(1), SigmaZ(1)
 sx2, sy2, sz2 = SigmaX(2), SigmaY(2), SigmaZ(2)
 
 sm, sp = SigmaMinus(), SigmaPlus()
+sm1, sp1 = SigmaMinus(1), SigmaPlus(1)
+sm2, sp2 = SigmaMinus(2), SigmaPlus(2)
 
 
 def test_pauli_operators_types():
@@ -42,6 +44,14 @@ def test_pauli_operators_commutator_with_labels():
     assert Commutator(sy1, sz2).doit() == 0
     assert Commutator(sz1, sx2).doit() == 0
 
+    assert Commutator(sz1, sx2).doit() == 0
+    assert Commutator(sz1, sx2).doit() == 0
+    assert Commutator(sz1, sx2).doit() == 0
+
+    assert Commutator(sm1, sz2).doit() == 0
+    assert Commutator(sm1, sp2).doit() == 0
+    assert Commutator(sm1, sm2).doit() == 0
+    
 
 def test_pauli_operators_anticommutator():
 
